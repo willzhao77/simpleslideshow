@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="slideshow-container">
+    <div class="mySlides">
+      <img src="img\1.jpg" alt="">
+    </div>
+    <div class="mySlides">
+      <img src="img\2.jpg" alt="">
+    </div>
+    <div class="mySlides">
+      <img src="img\3.jpg" alt="">
+    </div>
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+
+  <div style="text-align: center;">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+</body>
+</html>
+
+
+
+
+<script type="text/javascript">
+  var slideIndex = 1;
+  var myTimer;
+  window.addEventListener("load", function() {
+    showSlides(slideIndex);
+    myTimer = setInterval(function(){plusSlides(1)}, 4000);
+  })
+
+
+  function plusSlides(n){
+    clearInterval(myTimer);
+    if(n < 0 ){
+      showSlides(slideIndex -= 1);
+      } else {
+      showSlides(slideIndex += 1);
+      }
+
+    if( n === -1){
+      myTimer = setInterval(function(){plusSlides(n + 2)}, 4000);
+    } else {
+      myTimer = setInterval(function(){plusSlides(n + 1)}, 4000);
+    }
+  }
+
+  function showSlides(n){
+    var i;
+    var slides = document.getElementsByClassName('mySlides');
+    var dots = document.getElementsByClassName('dot')
+    if (n > slides.length){
+      slideIndex = 1;
+    }
+    if (n < 1 ){
+      slideIndex = slides.length;
+    }
+    for (i =0; i < slides.length; i++){
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++){
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className +=" active";
+
+  }
+
+  function currentSlide(n){
+    clearInterval(myTimer);
+    myTimer = setInterval(function(){plusSlides(n + 1)}, 4000);
+    showSlides(slideIndex = n);
+  }
+
+
+
+</script>
